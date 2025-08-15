@@ -11,9 +11,6 @@ Aplicación multiplataforma (PC y móvil) que detecta en tiempo real si una pers
 - Opción para tomar captura cuando no se detecta casco.
 - Optimizado para bajo consumo en móviles.
 
-## 🖼️ Capturas de pantalla
-*(Agrega imágenes o GIFs de la aplicación aquí una vez esté funcional)*
-
 ## 📋 Requisitos
 - Python **3.9 o superior**
 - Cámara web o cámara de dispositivo móvil
