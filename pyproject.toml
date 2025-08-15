@@ -1,0 +1,212 @@
+[build-system]
+requires = ["flet>=0.24.1", "setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helmet-detector"
+version = "1.0.0"
+description = "Detector de Casco de Seguridad con IA usando Flet"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Helmet Detector Team", email = "info@helmetdetector.com"}
+]
+maintainers = [
+    {name = "Helmet Detector Team", email = "info@helmetdetector.com"}
+]
+keywords = ["computer-vision", "helmet-detection", "safety", "flet", "opencv", "yolo", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Multimedia :: Graphics :: Capture :: Digital Camera",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Environment :: Win32 (MS Windows)",
+    "Environment :: X11 Applications",
+    "Environment :: MacOS X"
+]
+requires-python = ">=3.8"
+dependencies = [
+    "flet>=0.24.1",
+    "opencv-python>=4.8.1.78",
+    "opencv-contrib-python>=4.8.1.78",
+    "numpy>=1.24.3,<2.0.0",
+    "Pillow>=10.0.0",
+    "requests>=2.31.0",
+    "python-dateutil>=2.8.2"
+]
+
+[project.optional-dependencies]
+dev = [
+    "flet[dev]>=0.24.1",
+    "buildozer>=1.5.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0"
+]
+mobile = [
+    "buildozer>=1.5.0",
+    "plyer>=2.1.0"
+]
+yolo = [
+    "ultralytics>=8.0.0",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0"
+]
+advanced = [
+    "tensorflow>=2.13.0",
+    "scikit-learn>=1.3.0",
+    "matplotlib>=3.7.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/helmet-detector/helmet-detector"
+Documentation = "https://helmet-detector.readthedocs.io/"
+Repository = "https://github.com/helmet-detector/helmet-detector.git"
+"Bug Tracker" = "https://github.com/helmet-detector/helmet-detector/issues"
+Changelog = "https://github.com/helmet-detector/helmet-detector/blob/main/CHANGELOG.md"
+
+[project.scripts]
+helmet-detector = "helmet_detector:main"
+helmet-detector-setup = "setup:main"
+
+[project.gui-scripts]
+"Helmet Detector" = "helmet_detector:main"
+
+# Configuración de herramientas de desarrollo
+[tool.setuptools]
+py-modules = ["helmet_detector", "setup"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["helmet_detector*"]
+exclude = ["tests*", "docs*", "build*", "dist*", "*.egg-info*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md", "*.cfg", "*.names", "*.weights", "*.jpg", "*.png", "*.ico", "*.icns"]
+
+# Configuración de Black (formateador de código)
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | venv
+)/
+'''
+
+# Configuración de MyPy (verificador de tipos)
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+# Configuración de pytest
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "tests",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+# Configuración de coverage
+[tool.coverage.run]
+source = ["helmet_detector"]
+omit = [
+    "tests/*",
+    "setup.py",
+    "venv/*",
+    "build/*",
+    "dist/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+# Configuración específica para Flet
+[tool.flet]
+name = "Helmet Detector"
+description = "Detector de Casco de Seguridad con IA"
+module = "helmet_detector"
+icon = "assets/icon.png"
+
+[tool.flet.web]
+route_url_strategy = "path"
+
+[tool.flet.macos]
+bundle_id = "com.helmetdetector.app"
+category = "public.app-category.productivity"
+copyright = "© 2024 Helmet Detector Team"
+
+[tool.flet.windows]
+file_description = "Detector de Casco de Seguridad"
+product_name = "Helmet Detector"
+file_version = "1.0.0.0"
+product_version = "1.0.0"
+company_name = "Helmet Detector Team"
+copyright = "© 2024 Helmet Detector Team"
+
+[tool.flet.android]
+package = "com.helmetdetector.app"
+permissions = [
+    "android.permission.CAMERA",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE"
+]
+adaptive_icon_background = "#1a1a1a"
+adaptive_icon_foreground = "assets/icon_foreground.png"
+
+[tool.flet.ios]
+bundle_id = "com.helmetdetector.app"
+team_id = "YOUR_TEAM_ID"

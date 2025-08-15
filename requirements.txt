@@ -1,0 +1,25 @@
+# Detector de Casco de Seguridad - Dependencias
+# ================================================
+
+# Framework principal
+flet>=0.24.1
+
+# Visión por computadora
+opencv-python>=4.8.1.78
+opencv-contrib-python>=4.8.1.78
+
+# Procesamiento de imágenes y datos
+numpy>=1.24.3
+Pillow>=10.0.0
+
+# Utilidades
+requests>=2.31.0
+
+# Para compilación (opcional)
+flet[dev]>=0.24.1
+
+# Dependencias adicionales para móviles
+buildozer>=1.5.0
+
+# Logging y utilidades de sistema
+python-dateutil>=2.8.2
